@@ -1,6 +1,6 @@
--- I'm looking for 'Smurfing' patterns here. 
+-- I am looking for 'Smurfing' patterns here. 
 -- Specifically, users trying to dodge the ₹50k PAN reporting limit (Rule 114B).
--- If a user does this 3+ times, it's a major red flag for 'Structuring'.
+-- If a user does this more than 3 times, it is a major red flag for 'Structuring'.
 
 SELECT nameOrig AS CustomerID, 
        COUNT(*) AS Number_of_Hits, 
@@ -40,8 +40,8 @@ that moved ₹146 Lakhs out of the system within minutes of receipt.*/
 
 -- Checking for 'Transaction Velocity'.
 -- If someone makes more than 5 transfers in 1 hour (one 'step'), 
--- it's likely an Account Takeover or a bot. 
--- I'm flagging these for the real-time monitoring team to freeze the account.
+-- It is likely an Account Takeover or a bot. 
+-- I am flagging these for the real-time monitoring team to freeze the account.
 
 SELECT nameOrig AS Flagged_Account, 
        step AS Transaction_Hour, 
@@ -49,7 +49,7 @@ SELECT nameOrig AS Flagged_Account,
        SUM(amount) AS Total_Hourly_Volume
 FROM PaySim
 GROUP BY nameOrig, step
-HAVING COUNT(*) > 5       -- A Normal customers don't move money this fast
+HAVING COUNT(*) > 5       -- A Normal customers do not move money this fast
 ORDER BY Frequency_Per_Hour DESC;
 
 /*This velocity check caught 432 accounts with suspicious digital activity, 
